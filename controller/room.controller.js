@@ -59,7 +59,7 @@ export async function getRoom(req, res) {
     if (!id) return res.status(400).json({ error: "No Chat id present ---!" })
 
     //to get room through room id 
-    const room = await Room.findById(id)
+    const room = await Room.findById(id).populate('messages');
     //if don't have room 
     if (!room) return res.status(400).json({ error: "No room found ....!" })
 

@@ -13,7 +13,8 @@ export async function getChat(req, res) {
         const { roomid } = req.query;
         if (!roomid) return res.status(400).json({ error: "No room id present....!" });
 
-        const messages = await Message.find({ room: roomid });
+        //her by passing some value to arguments we can remove extra data of _v and room
+        const messages = await Message.find({ room: roomid },{__v:0, room:0});
         //if we don't have messages
         if (!messages) return res.status(400).json({ error: "No message found....!" });
 
