@@ -1,5 +1,10 @@
+
+//to get data of room with id 
+//http://localhost:3000/api/room/id  id can be 1 ,2 ,3 if created through post request
+
+
 import connect from "@/database/conn";
-import { createRoom, getAllRooms } from "@/controller/room.controller";
+import { createRoom,getRoom } from "@/controller/room.controller";
 
 
 export default async function handler(req, res) {
@@ -8,10 +13,11 @@ export default async function handler(req, res) {
 
   switch (req.method) {
     case "GET":
-      await getAllRooms(req, res)
+        //change her getAllRoom to getRoom to see demo of GET room by id 
+      await getRoom(req,res);
       break;
-    // GET request se rooms show honge jitne bhi post se create hue honge
-    //http://localhost:3000/api/room 
+    // GET request mein id dene se particular id response mein show hogi 
+    //http://localhost:3000/api/room/id  id can be 1 ,2 ,3 ....  but first we have to create room using post request 
 
 
     case "POST":
