@@ -51,13 +51,43 @@ export async function createRoom(req, res) {
 //room data from room ID not other data will show 
 export async function getRoom(req, res) {
 
+  //now we will get  data through id of data 
   try {
-    const {id} = req.query;
-    res.json(req.query);
-    console.log(id);
+
+    const { id } = req.query;
+    //if we don't have id 
+    if (!id) return res.status(400).json({ error: "No Chat id present ---!" })
+
+    //to get room through room id 
+    const room = await Room.findById(id)
+    //if don't have room 
+    if (!room) return res.status(400).json({ error: "No room found ....!" })
+
+    //if everything is ok and room found then return data from room
+    return res.status(200).json({ success: true, data: room })
+  }
+  catch (error) {
+    return res.status(400).json({ error });
+  }
+}
+
+
+/** Delete  http://localhost:3000/api/room/id   */
+
+export async function deleteRoom(req, res) {
+  try {
+    const { id } = req.query;
+    //check if id not found  
+    if (!id) return res.status(400).json({ error: "NO chat id present ....!" })
+
+    //to delete data according to id from mongodb or database
+    const del = await Room.findByIdAndDelete(id);
+
+    console.log("deleted waali: ", del);
+    return res.status(200).json({ success: true, deleted: id })
   }
   catch (error) {
     console.log(error);
-    return res.status(400).json({ error });
+    return res.status(400).json({ error: error });
   }
 }
