@@ -3,10 +3,10 @@ import {Schema,model, models} from 'mongoose';
 const MessageSchema = new Schema({
     question: String,
     answer : String,
-    messages : [{
+    room : {
         type: Schema.Types.ObjectId,
-        ref: 'Message'
-    }]
+        ref: 'Room'
+    }
 });
 
 export default models.Message || model('Message', MessageSchema);
