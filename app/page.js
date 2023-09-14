@@ -53,6 +53,10 @@ export default function Home() {
         //condition if we have roomid then only <Main/> content show
         roomid ? (<Main roomid ={roomid}></Main>) :(<Banner/>)
        }
+       {/* condition if we have roomid only then display search component with roomid */}
+       {
+        roomid && <Search roomid={roomid}></Search>
+       }
       </div>
       <Search></Search>
     </div>
