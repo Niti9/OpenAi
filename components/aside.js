@@ -4,7 +4,7 @@ import { BiComment, BiPlus, BiTrashAlt } from "react-icons/bi";
 import {useMutation, useQueryClient} from 'react-query';
 import {createRoom,deleteRoom} from '@/lib/request';
 
-export default ({getRooms}) => {
+export default ({getRooms,handler}) => {
 // now will get array of rooms from database , now here will try to iterate them
 console.log(getRooms);
 
@@ -52,7 +52,8 @@ const deleteMutation= useMutation(deleteRoom,{
             return(
               //here index is given as key so error will not create
               <div key={index} className="w-full border-0 rounded-md bg-gray-800 py-1 px-3 flex justify-center items-center">
-              <button className="text-left truncate w-full active:bg-violet-700 ">
+              <button className="text-left truncate w-full active:bg-violet-700  "
+              onClick={()=> handler(chat._id)}>
                 {/* truncate will hide all the overflow text */}
   
                 <span className="block py-3 text-gray-50">
